@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: header"></head>
+
+<body>
+	<div class="container">
+		<img src="https://cdn-icons-png.flaticon.com/512/2411/2411135.png" style="width: 50px;"> <br> <br>
+		<h1 class="text-info">Search game</h1>
+		<form method="POST" action="/search" th:object="${Game}">
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" th:field="${game.name}" placeholder="Name"
+					aria-label="Recipient's username" aria-describedby="button-addon2">
+				<div class="input-group-append">
+					<button class="btn btn-info" type="submit" id="button-addon2">Search game</button>
+				</div>
+			</div>
+		</form>
+		<h3>Recently viewed games:</h3>
+		<a th:text="${'Result:'+cont}"></a>
+		<table class="table">
+			<thead class="table table-info table-striped">
+				<tr>
+					<td></td>
+					<td>Name</td>
+					<td>Cover</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="game : ${games}">
+					<td><img src="https://cdn-icons-png.flaticon.com/512/2411/2411135.png" style="width: 35px;"></td>
+					<td><a th:text="${game.name}"></a></td>
+					<td><a th:href="@{/showGameMongoDB(id=${game.id})}"> <img th:src="${game.cover}" width="100%;"> </a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>
