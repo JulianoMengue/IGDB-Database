@@ -4,17 +4,10 @@ public class ReleaseDate {
 
 	private String id;
 	private String human;
-	private String platform;
+	private Platform platform;
 
 	public ReleaseDate() {
 		super();
-	}
-
-	public ReleaseDate(String id, String human, String platform) {
-		super();
-		this.id = id;
-		this.human = human;
-		this.platform = platform;
 	}
 
 	public String getId() {
@@ -33,11 +26,11 @@ public class ReleaseDate {
 		this.human = human;
 	}
 
-	public String getPlatform() {
+	public Platform getPlatform() {
 		return platform;
 	}
 
-	public void setPlatform(String platform) {
+	public void setPlatform(Platform platform) {
 		this.platform = platform;
 	}
 

@@ -11,10 +11,10 @@
 		<a th:href="@{/}" class="btn btn-info">Back</a><br><br>
 
 		<h1 class="text-info">Search game</h1>
-		<form method="POST" action="/search" th:object="${Game}">
+		<form method="GET" action="/search" th:object="${Game}">
 			<div class="input-group mb-3">
 				<input type="text" class="form-control" th:field="${game.name}" placeholder="Name"
-					aria-label="Recipient's username" aria-describedby="button-addon2">
+					aria-label="Recipient's username" aria-describedby="button-addon2" required>
 				<div class="input-group-append">
 					<button class="btn btn-info" type="submit" id="button-addon2">Search game</button>
 				</div>
@@ -22,7 +22,7 @@
 		</form>
 
 		<p th:each="game : ${game}">
-			<a> <img th:src="${game.cover}" width="100%;"></a><br>
+			<a> <img th:src="${game.cover.url}" width="100%;"></a><br>
 			<a th:text="${game.summary}" class="btn btn-info" style="color: white;"></a><br>
 
 			<b>Videos</b>
@@ -33,25 +33,27 @@
 
 			<b>Screenshots</b>
 		<p th:each="screenshot : ${game.screenshots}">
-			<a th:href="${screenshot}"> <img th:src="${screenshot}" width="100%;"> </a>
+			<a th:href="${screenshot}"> <img th:src="${screenshot.url}" width="100%;"> </a>
 		</p><br>
 
-		<a th:href="${game.websites}" class="btn btn-info" style="color: white;"
+		<a th:href="${game.url}" class="btn btn-info" style="color: white;"
 			th:text="${game.name+' IGDB website'}"></a><br><br>
 
 		<b>Genres</b><br>
 		<span th:each="genre : ${game.genres}">
-			<a th:text="${genre}"></a><br>
+			<a th:text="${genre.name}"></a><br>
 		</span>
 
 		<b>Websites</b><br>
 		<span th:each="website : ${game.websites}">
-			<a th:text="${website}"></a><br>
+			<a th:text="${website.url}"></a><br>
 		</span>
 
 		<b>Release dates</b><br>
 		<span th:each="date : ${game.release_dates}">
-			<a th:text="${date}"></a> <br>
+			<a th:text="${date.human}"></a>
+			<a th:text="${date.platform}"></a>
+			 <br>
 		</span>
 
 		</p>

@@ -3,39 +3,30 @@ package com.julianomengue.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "games")
 public class Game {
 
-	private String cover;
+	private Cover cover;
 	private String name;
 	private String id;
 	private String url;
 	private String summary;
-	private List<String> screenshots = new ArrayList<>();
-	private List<String> genres = new ArrayList<>();
-	private List<String> platforms = new ArrayList<>();
-	private List<String> release_dates = new ArrayList<>();
-	private List<String> videos = new ArrayList<>();
-	private List<String> websites = new ArrayList<>();
+	private List<Screenshot> screenshots = new ArrayList<>();
+	private List<Genre> genres = new ArrayList<>();
+	private List<Platform> platforms = new ArrayList<>();
+	private List<ReleaseDate> release_dates = new ArrayList<>();
+	private List<Video> videos = new ArrayList<>();
+	private List<Website> websites = new ArrayList<>();
 
 	public Game() {
 		super();
 	}
 
-	public Game(String cover, String id) {
+	public Game(Cover cover, String name, String id, List<Platform> platforms) {
 		super();
-		this.cover = cover;
-		this.id = id;
-	}
-
-	public Game(String cover, String name, String id, String url) {
-		super();
-		this.cover = cover;
+		this.setCover(cover);
 		this.name = name;
 		this.id = id;
-		this.url = url;
+		this.setPlatforms(platforms);
 	}
 
 	public String getName() {
@@ -54,14 +45,6 @@ public class Game {
 		this.id = id;
 	}
 
-	public String getCover() {
-		return cover;
-	}
-
-	public void setCover(String cover) {
-		this.cover = cover;
-	}
-
 	public String getUrl() {
 		return url;
 	}
@@ -78,52 +61,60 @@ public class Game {
 		this.summary = summary;
 	}
 
-	public List<String> getGenres() {
-		return genres;
+	public Cover getCover() {
+		return cover;
 	}
 
-	public void setGenres(List<String> genres) {
-		this.genres = genres;
+	public void setCover(Cover cover) {
+		this.cover = cover;
 	}
 
-	public List<String> getPlatforms() {
-		return platforms;
-	}
-
-	public void setPlatforms(List<String> platforms) {
-		this.platforms = platforms;
-	}
-
-	public List<String> getRelease_dates() {
-		return release_dates;
-	}
-
-	public void setRelease_dates(List<String> release_dates) {
-		this.release_dates = release_dates;
-	}
-
-	public List<String> getVideos() {
-		return videos;
-	}
-
-	public void setVideos(List<String> videos) {
-		this.videos = videos;
-	}
-
-	public List<String> getWebsites() {
-		return websites;
-	}
-
-	public void setWebsites(List<String> websites) {
-		this.websites = websites;
-	}
-
-	public List<String> getScreenshots() {
+	public List<Screenshot> getScreenshots() {
 		return screenshots;
 	}
 
-	public void setScreenshots(List<String> screenshots) {
+	public void setScreenshots(List<Screenshot> screenshots) {
 		this.screenshots = screenshots;
+	}
+
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
+
+	public List<Platform> getPlatforms() {
+		return platforms;
+	}
+
+	public void setPlatforms(List<Platform> platforms) {
+		this.platforms = platforms;
+	}
+
+	public List<ReleaseDate> getRelease_dates() {
+		return release_dates;
+	}
+
+	public void setRelease_dates(List<ReleaseDate> release_dates) {
+		this.release_dates = release_dates;
+	}
+
+	public List<Video> getVideos() {
+		return videos;
+	}
+
+	public void setVideos(List<Video> videos) {
+		this.videos = videos;
+	}
+
+	public List<Website> getWebsites() {
+		return websites;
+	}
+
+	public void setWebsites(List<Website> websites) {
+		this.websites = websites;
 	}
 
 }

@@ -9,10 +9,9 @@ public class Cover {
 		super();
 	}
 
-	public Cover(String url, String id) {
+	public Cover(String url) {
 		super();
 		this.url = url;
-		this.id = id;
 	}
 
 	public String getUrl() {
