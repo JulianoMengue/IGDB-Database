@@ -3,7 +3,7 @@ package com.julianomengue.entity;
 public class Video {
 
 	private String id;
-	private String url;
+	private String video_id;
 
 	public Video() {
 		super();
@@ -17,12 +17,12 @@ public class Video {
 		this.id = id;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getVideo_id() {
+		return video_id;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setVideo_id(String video_id) {
+		this.video_id = video_id;
 	}
 
 }

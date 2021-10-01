@@ -40,7 +40,7 @@ public class GameService {
 	public Game findById(String id) throws UnirestException, IOException {
 		HttpResponse<JsonNode> response = Unirest.post(games).header("Client-ID", clientId)
 				.header("Authorization", Bearer).header("Accept", json)
-				.body("fields cover.url,genres.name,name,platforms.name,release_dates.human, screenshots.url,summary,url,websites.url; where id ="
+				.body("fields cover.url,genres.name,name,platforms.name,release_dates.human, release_dates.platform.name ,screenshots.url,summary,url,websites.url,videos.video_id; where id ="
 						+ id + ";")
 				.asJson();
 		ObjectMapper objectMapper = new ObjectMapper();
