@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.julianomengue.entity.Cover;
 import com.julianomengue.entity.Game;
 import com.julianomengue.services.GameService;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -20,6 +21,8 @@ public class GameController {
 
 	@Autowired
 	private GameService gameService;
+
+	private String noImage = "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg";
 
 	String error = "Not allowed!";
 
@@ -42,6 +45,9 @@ public class GameController {
 	public String showGame(Model model, @RequestParam String id) throws UnirestException, NoSuchFieldException,
 			SecurityException, IllegalArgumentException, IllegalAccessException, IOException {
 		Game game = this.gameService.findById(id);
+		if (game.getCover() == null) {
+			game.setCover(new Cover(noImage));
+		}
 		model.addAttribute("game", game);
 		return "games/game";
 	}

@@ -21,14 +21,6 @@ public class Game {
 		super();
 	}
 
-	public Game(Cover cover, String name, String id, List<Platform> platforms) {
-		super();
-		this.setCover(cover);
-		this.name = name;
-		this.id = id;
-		this.setPlatforms(platforms);
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -115,6 +107,13 @@ public class Game {
 
 	public void setWebsites(List<Website> websites) {
 		this.websites = websites;
+	}
+
+	@Override
+	public String toString() {
+		return "Game [cover=" + cover + ", name=" + name + ", id=" + id + ", url=" + url + ", summary=" + summary
+				+ ", screenshots=" + screenshots + ", genres=" + genres + ", platforms=" + platforms
+				+ ", release_dates=" + release_dates + ", videos=" + videos + ", websites=" + websites + "]";
 	}
 
 }

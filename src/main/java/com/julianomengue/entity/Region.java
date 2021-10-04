@@ -1,17 +1,12 @@
 package com.julianomengue.entity;
 
-public class Genre {
+public class Region {
 
 	private String id;
 	private String name;
 
-	public Genre() {
+	public Region() {
 		super();
-	}
-
-	public Genre(String name) {
-		super();
-		this.name = name;
 	}
 
 	public String getId() {

@@ -9,6 +9,11 @@ public class Screenshot {
 		super();
 	}
 
+	public Screenshot(String url) {
+		super();
+		this.url = url;
+	}
+
 	public String getId() {
 		return id;
 	}

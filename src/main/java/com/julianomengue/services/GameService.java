@@ -1,7 +1,6 @@
 package com.julianomengue.services;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.julianomengue.entity.Cover;
 import com.julianomengue.entity.Game;
-import com.julianomengue.entity.Platform;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -25,6 +23,7 @@ public class GameService {
 	private String noImage = "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg";
 
 	private String games = "https://api.igdb.com/v4/games";
+	private String dates = "https://api.igdb.com/v4/release_dates";
 
 	public List<Game> findAll(String name) throws UnirestException, IOException {
 		HttpResponse<JsonNode> jsonResponse = Unirest.post(games).header("Client-ID", clientId)
@@ -39,9 +38,11 @@ public class GameService {
 
 	public Game findById(String id) throws UnirestException, IOException {
 		HttpResponse<JsonNode> response = Unirest.post(games).header("Client-ID", clientId)
-				.header("Authorization", Bearer).header("Accept", json)
-				.body("fields cover.url,genres.name,name,platforms.name,release_dates.human, release_dates.platform.name ,screenshots.url,summary,url,websites.url,videos.video_id; where id ="
-						+ id + ";")
+				.header("Authorization", Bearer).header("Accept", json).body("fields cover.url," + "genres.name,"
+						+ "name," + "platforms.name," + "release_dates.human," + "release_dates.platform.name,"
+						// + "release_dates.region.name,"
+						+ "screenshots.url," + "summary," + "url," + "websites.url," + "videos.video_id;"
+						+ " where id =" + id + ";")
 				.asJson();
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Game> games = objectMapper.readValue(response.getBody().toString().replaceAll("t_thumb", "t_1080p"),
@@ -52,15 +53,8 @@ public class GameService {
 
 	public List<Game> withoutCover(List<Game> games) {
 		for (int i = 0; i < games.size(); i++) {
-			if (games.get(i).getPlatforms().size() == 0) {
-				Platform platform = new Platform("Empty");
-				List<Platform> platforms = new ArrayList<>();
-				platforms.add(platform);
-				games.get(i).setPlatforms(platforms);
-			}
 			if (games.get(i).getCover() == null) {
-				Cover cover = new Cover(noImage);
-				games.get(i).setCover(cover);
+				games.get(i).setCover(new Cover(noImage));
 			}
 		}
 		return games;

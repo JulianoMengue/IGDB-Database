@@ -5,9 +5,15 @@ public class ReleaseDate {
 	private String id;
 	private String human;
 	private Platform platform;
+	private Region region;
 
 	public ReleaseDate() {
 		super();
+	}
+
+	public ReleaseDate(String human) {
+		super();
+		this.human = human;
 	}
 
 	public String getId() {
@@ -32,6 +38,14 @@ public class ReleaseDate {
 
 	public void setPlatform(Platform platform) {
 		this.platform = platform;
+	}
+
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
 	}
 
 }
