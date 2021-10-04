@@ -23,7 +23,6 @@ public class GameService {
 	private String noImage = "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg";
 
 	private String games = "https://api.igdb.com/v4/games";
-	private String dates = "https://api.igdb.com/v4/release_dates";
 
 	public List<Game> findAll(String name) throws UnirestException, IOException {
 		HttpResponse<JsonNode> jsonResponse = Unirest.post(games).header("Client-ID", clientId)
@@ -38,11 +37,10 @@ public class GameService {
 
 	public Game findById(String id) throws UnirestException, IOException {
 		HttpResponse<JsonNode> response = Unirest.post(games).header("Client-ID", clientId)
-				.header("Authorization", Bearer).header("Accept", json).body("fields cover.url," + "genres.name,"
-						+ "name," + "platforms.name," + "release_dates.human," + "release_dates.platform.name,"
-						// + "release_dates.region.name,"
-						+ "screenshots.url," + "summary," + "url," + "websites.url," + "videos.video_id;"
-						+ " where id =" + id + ";")
+				.header("Authorization", Bearer).header("Accept", json)
+				.body("fields cover.url," + "genres.name," + "name," + "platforms.name," + "release_dates.human,"
+						+ "release_dates.platform.name," + "screenshots.url," + "summary," + "url," + "websites.url,"
+						+ "videos.video_id;" + " where id =" + id + ";")
 				.asJson();
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Game> games = objectMapper.readValue(response.getBody().toString().replaceAll("t_thumb", "t_1080p"),
