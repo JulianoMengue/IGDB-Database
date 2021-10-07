@@ -27,9 +27,13 @@ public class GameController {
 	String error = "Not allowed!";
 
 	@GetMapping()
-	public String games(Model model) {
+	public String games(Model model) throws UnirestException, IOException {
 		Game game = new Game();
+		this.gameService.psStore();
+		List<Game> games = this.gameService.findAll();
 		model.addAttribute("game", game);
+		model.addAttribute("cont", games.size());
+		model.addAttribute("games", games);
 		return "games/search-game";
 	}
 

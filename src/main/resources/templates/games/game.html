@@ -6,11 +6,8 @@
 </head>
 
 <body>
-	<div class="container">
-		<img src="https://cdn-icons-png.flaticon.com/512/2411/2411135.png" style="width: 50px;"> <br> <br>
-		<a th:href="@{/}" class="btn btn-info">Back</a><br><br>
-
-		<h1 class="text-info">Search game</h1>
+	<div>
+		<h4 class="text-info">Search game</h4>
 		<form method="GET" action="/search" th:object="${Game}">
 			<div class="input-group mb-3">
 				<input type="text" class="form-control" th:field="${game.name}" placeholder="Name"
@@ -34,10 +31,7 @@
 			<b>Screenshots</b>
 		<p th:each="screenshot : ${game.screenshots}">
 			<a th:href="${screenshot.url}"> <img th:src="${screenshot.url}" width="100%;"> </a>
-		</p><br>
-
-		<a th:href="${game.url}" class="btn btn-info" style="color: white;"
-			th:text="${game.name+' IGDB website'}"></a><br><br>
+		</p>
 
 		<b>Genres</b><br>
 		<span th:each="genre : ${game.genres}">
@@ -46,8 +40,11 @@
 
 		<b>Websites</b><br>
 		<span th:each="website : ${game.websites}">
-			<a th:text="${website.url}"></a><br>
+			<a th:text="${website.url}" th:href="${website.url}"></a><br>
 		</span>
+
+		<b>IGDB webpage</b><br>
+		<a th:href="${game.url}" th:text="${game.name+' IGDB website'}"></a><br>
 
 		<b>Release dates</b><br>
 		<span th:each="date : ${game.release_dates}">
@@ -60,5 +57,6 @@
 
 	</div>
 </body>
+
 
 </html>

@@ -4,13 +4,8 @@
 <head th:replace="header :: header"></head>
 
 <body>
-	<div class="container">
-
-
-
-		<img src="https://cdn-icons-png.flaticon.com/512/2411/2411135.png" style="width: 50px;"> <br> <br>
-		<h1 class="text-info">Search game</h1>
-
+	<div>
+		<h4 class="text-info">Search game</h4>
 		<form method="GET" action="/search" th:object="${Game}">
 			<div class="input-group mb-3">
 				<input type="text" class="form-control" th:field="${game.name}" placeholder="Name"
@@ -20,10 +15,35 @@
 				</div>
 			</div>
 		</form>
+
+		<b class="text-info">2021 video game releases so far:</b>
+		<b th:text="${cont}"></b>
+		<table class="table">
+			<thead class="table table-info table-striped">
+				<tr>
+					<td>Name</td>
+					<td>Cover</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="game : ${games}">
+					<td><b>Name:</b><br>
+						<a th:text="${game.name}"></a><br>
+						<b>Platforms:</b>
+						<p th:each="platform : ${game.platforms}"> <a th:text="${platform.name}"></a>
+						</p>
+					</td>
+					<td><a th:href="@{/showGame(id=${game.id})}"> <img th:src="${game.cover.url}" width="100%;">
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
 	</div>
 </body>
-<script>
 
-</script>
 
 </html>

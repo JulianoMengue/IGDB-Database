@@ -11,16 +11,27 @@
 	<link rel="stylesheet" th:href="@{/css/formatting.css}">
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2411/2411135.png">
 </head>
-
+<style th:fragment="header">
+	body {
+		background-image:
+			url("https://cdn.wallpapersafari.com/15/56/rZJpjL.png");
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: 100% 100%;
+		padding-left: 2px;
+		padding-top: 2px;
+		width: 100%;
+	}
+</style>
 
 
 <body th:fragment="header">
-	<div class="container">
-		<br>
-		<h2 class="text-info">IGDB game database</h2>
-	</div>
-	<br>
+	<div>
+		<a href="/"><img src="https://i.ibb.co/qnMB28k/Logo.png"></a>
+	</div><br>
+
 </body>
 
 </html>

@@ -4,6 +4,7 @@ public class ReleaseDate {
 
 	private String id;
 	private String human;
+	private Long date;
 	private Platform platform;
 	private Region region;
 
@@ -46,6 +47,14 @@ public class ReleaseDate {
 
 	public void setRegion(Region region) {
 		this.region = region;
+	}
+
+	public Long getDate() {
+		return date;
+	}
+
+	public void setDate(Long date) {
+		this.date = date;
 	}
 
 }

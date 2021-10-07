@@ -22,12 +22,25 @@ public class GameService {
 	private String json = "application/json";
 	private String noImage = "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg";
 
+	private String psStore = "https://store.playstation.com/store/api/chihiro/00_09_000/container/US/en/999/";
 	private String games = "https://api.igdb.com/v4/games";
 
 	public List<Game> findAll(String name) throws UnirestException, IOException {
 		HttpResponse<JsonNode> jsonResponse = Unirest.post(games).header("Client-ID", clientId)
 				.header("Authorization", Bearer).header("Accept", json)
 				.body("fields platforms.name,cover.url,name; limit 300; search \"+" + name + "+\";").asJson();
+		ObjectMapper objectMapper = new ObjectMapper();
+		List<Game> games = objectMapper.readValue(jsonResponse.getBody().toString().replaceAll("t_thumb", "t_1080p"),
+				new TypeReference<List<Game>>() {
+				});
+		return games;
+	}
+
+	public List<Game> findAll() throws UnirestException, IOException {
+		HttpResponse<JsonNode> jsonResponse = Unirest.post(games).header("Client-ID", clientId)
+				.header("Authorization", Bearer).header("Accept", json)
+				.body("fields platforms.name,cover.url,name; limit 300; sort release_dates.date desc; where release_dates.date > 1609455600 & release_dates.date < 1633471200 & rating >= 80; ")
+				.asJson();
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Game> games = objectMapper.readValue(jsonResponse.getBody().toString().replaceAll("t_thumb", "t_1080p"),
 				new TypeReference<List<Game>>() {
@@ -47,6 +60,11 @@ public class GameService {
 				new TypeReference<List<Game>>() {
 				});
 		return games.get(0);
+	}
+
+	public void psStore() throws UnirestException, IOException {
+		HttpResponse<JsonNode> response = Unirest.get(psStore).asJson();
+		System.out.println(response.getBody().toString());
 	}
 
 	public List<Game> withoutCover(List<Game> games) {
