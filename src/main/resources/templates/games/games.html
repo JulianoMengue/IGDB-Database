@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="header :: header">
-
-
-</head>
+<head th:replace="header :: header"></head>
 
 <body>
-	<div >
+	<div>
 		<div>
 			<h4 class="text-info">Search game</h4>
 			<form method="GET" action="/search" th:object="${Game}">
@@ -31,7 +28,7 @@
 				<tbody>
 					<tr th:each="game : ${games}">
 						<td><b>Name:</b><br>
-						<a th:text="${game.name}"></a><br><br>
+							<a th:text="${game.name}"></a><br><br>
 							<b>Platforms:</b>
 							<p th:each="platform : ${game.platforms}"> <a th:text="${platform.name}"></a>
 							</p>
@@ -45,6 +42,5 @@
 		</div>
 	</div>
 </body>
-
 
 </html>
