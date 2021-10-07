@@ -6,8 +6,8 @@
 </head>
 
 <body>
-	<div>
-		<h4 class="text-info">Search game</h4>
+	<div class="container-fluid">
+		<h4 class=" text-info">Search game</h4>
 		<form method="GET" action="/search" th:object="${Game}">
 			<div class="input-group mb-3">
 				<input type="text" class="form-control" th:field="${game.name}" placeholder="Name"
