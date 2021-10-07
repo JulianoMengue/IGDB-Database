@@ -22,7 +22,6 @@ public class GameService {
 	private String json = "application/json";
 	private String noImage = "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg";
 
-	private String psStore = "https://store.playstation.com/store/api/chihiro/00_09_000/container/US/en/999/";
 	private String games = "https://api.igdb.com/v4/games";
 
 	public List<Game> findAll(String name) throws UnirestException, IOException {
@@ -60,11 +59,6 @@ public class GameService {
 				new TypeReference<List<Game>>() {
 				});
 		return games.get(0);
-	}
-
-	public void psStore() throws UnirestException, IOException {
-		HttpResponse<JsonNode> response = Unirest.get(psStore).asJson();
-		System.out.println(response.getBody().toString());
 	}
 
 	public List<Game> withoutCover(List<Game> games) {

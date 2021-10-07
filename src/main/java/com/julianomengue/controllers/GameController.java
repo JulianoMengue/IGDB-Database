@@ -29,7 +29,6 @@ public class GameController {
 	@GetMapping()
 	public String games(Model model) throws UnirestException, IOException {
 		Game game = new Game();
-		this.gameService.psStore();
 		List<Game> games = this.gameService.findAll();
 		model.addAttribute("game", game);
 		model.addAttribute("cont", games.size());
