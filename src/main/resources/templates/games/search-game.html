@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="header :: header"></head>
+<head th:replace="header :: header">
+
+</head>
 
 <body>
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7123236910081856"
+		crossorigin="anonymous"></script>
 	<div>
 		<h4 class="text-info">Search game</h4>
 		<form method="GET" action="/search" th:object="${Game}">
@@ -16,8 +20,7 @@
 			</div>
 		</form>
 
-		<b class="text-info">2021 video game releases so far:</b>
-		<b th:text="${cont}"></b>
+		<b class="text-info">New releases</b>
 		<table class="table">
 			<thead class="table table-info table-striped">
 				<tr>
