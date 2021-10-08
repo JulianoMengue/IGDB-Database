@@ -5,21 +5,13 @@
 
 <body>
 	<div>
-
-		<a th:text="${'Result:'+cont}"></a>
 		<table class="table">
-			<thead class="table table-info table-striped">
-				<tr>
-					<td>Name</td>
-					<td>Cover</td>
-				</tr>
-			</thead>
 			<tbody>
 				<tr th:each="game : ${games}">
-					<td><b>Name:</b><br>
-						<a th:text="${game.name}"></a><br><br>
-						<b>Platforms:</b>
-						<p th:each="platform : ${game.platforms}"> <a th:text="${platform.name}"></a>
+					<td>
+						<h5 th:text="${game.name}" style="color: white;"></h5>
+						<p th:each="platform : ${game.platforms}"> <a th:text="${platform.name}"
+								style="color: white;"></a>
 						</p>
 					</td>
 					<td><a th:href="@{/showGame(id=${game.id})}"> <img th:src="${game.cover.url}" width="100%;">
@@ -29,7 +21,6 @@
 			</tbody>
 		</table>
 	</div>
-
 </body>
 
 </html>
