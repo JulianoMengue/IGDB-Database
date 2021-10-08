@@ -5,42 +5,31 @@
 
 <body>
 	<div>
-		<div>
-			<h4 class="text-info">Search game</h4>
-			<form method="GET" action="/search" th:object="${Game}">
-				<div class="input-group mb-3">
-					<input type="text" class="form-control" th:field="${game.name}" placeholder="Name"
-						aria-label="Recipient's username" aria-describedby="button-addon2" required>
-					<div class="input-group-append">
-						<button class="btn btn-info" type="submit" id="button-addon2">Search game</button>
-					</div>
-				</div>
-			</form>
 
-			<a th:text="${'Result:'+cont}"></a>
-			<table class="table">
-				<thead class="table table-info table-striped">
-					<tr>
-						<td>Name</td>
-						<td>Cover</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="game : ${games}">
-						<td><b>Name:</b><br>
-							<a th:text="${game.name}"></a><br><br>
-							<b>Platforms:</b>
-							<p th:each="platform : ${game.platforms}"> <a th:text="${platform.name}"></a>
-							</p>
-						</td>
-						<td><a th:href="@{/showGame(id=${game.id})}"> <img th:src="${game.cover.url}" width="100%;">
-							</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+		<a th:text="${'Result:'+cont}"></a>
+		<table class="table">
+			<thead class="table table-info table-striped">
+				<tr>
+					<td>Name</td>
+					<td>Cover</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="game : ${games}">
+					<td><b>Name:</b><br>
+						<a th:text="${game.name}"></a><br><br>
+						<b>Platforms:</b>
+						<p th:each="platform : ${game.platforms}"> <a th:text="${platform.name}"></a>
+						</p>
+					</td>
+					<td><a th:href="@{/showGame(id=${game.id})}"> <img th:src="${game.cover.url}" width="100%;">
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
+
 </body>
 
 </html>

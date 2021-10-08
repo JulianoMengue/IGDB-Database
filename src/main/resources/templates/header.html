@@ -11,14 +11,14 @@
 	<link rel="stylesheet" th:href="@{/css/formatting.css}">
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-	<link rel="icon" href="https://toppng.com/uploads/preview/mega-man-helmet-8-bit-mega-man-helmet-115631736553jjixloz8k.png">
+	<link rel="icon"
+		href="https://toppng.com/uploads/preview/mega-man-helmet-8-bit-mega-man-helmet-115631736553jjixloz8k.png">
 	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7123236910081856"
 		crossorigin="anonymous"></script>
 </head>
 <style th:fragment="header">
 	body {
-		background-image:
-			url("https://cdn.wallpapersafari.com/15/56/rZJpjL.png");
+		background-image: url('https://media.istockphoto.com/photos/green-background-3d-render-picture-id1226478926?b=1&k=20&m=1226478926&s=170667a&w=0&h=JnDdZVzHtMBfq5ZYQBevaTDCvbDRS2ZS5iGeaJKXBqA=');
 		background-repeat: no-repeat;
 		background-attachment: fixed;
 		background-size: 100% 100%;
@@ -26,11 +26,60 @@
 		padding-top: 2px;
 		width: 100%;
 	}
+
+	.header {
+		padding: 10px 16px;
+		background-image: url('https://media.istockphoto.com/photos/green-background-3d-render-picture-id1226478926?b=1&k=20&m=1226478926&s=170667a&w=0&h=JnDdZVzHtMBfq5ZYQBevaTDCvbDRS2ZS5iGeaJKXBqA=');
+	}
+
+	.content {
+		padding: 16px;
+	}
+
+	.sticky {
+		position: fixed;
+		top: 0;
+		width: 100%
+	}
+
+	.sticky+.content {
+		padding-top: 102px;
+	}
 </style>
 
 
 <body th:fragment="header">
-	<a href="/"><img src="https://i.ibb.co/qnMB28k/Logo.png"></a>
-	<br>
+	<div class="header" id="myHeader">
+		<a href="/"><img src="https://i.ibb.co/qnMB28k/Logo.png"></a>
+		<form method="GET" action="/search" th:object="${Game}">
+			<div class="input-group mb-3">
+				<input type="text" class="form-control" th:field="${game.name}" placeholder="Name"
+					aria-label="Recipient's username" aria-describedby="button-addon2" required>
+				<div class="input-group-append">
+					<button class="btn btn-info" type="submit" id="button-addon2">Search game</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<script>
+
+		window.onscroll = function () {myFunction()};
+		var header = document.getElementById("myHeader");
+		var sticky = header.offsetTop;
+
+		function myFunction() {
+			if (window.pageYOffset > sticky) {
+				header.classList.add("sticky");
+			} else {
+				header.classList.remove("sticky");
+			}
+		}
+
+
+	</script>
 </body>
+
+
+
 </html>
