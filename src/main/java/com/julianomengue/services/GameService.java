@@ -1,6 +1,10 @@
 package com.julianomengue.services;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -44,6 +48,19 @@ public class GameService {
 		List<Game> games = objectMapper.readValue(jsonResponse.getBody().toString().replaceAll("t_thumb", "t_1080p"),
 				new TypeReference<List<Game>>() {
 				});
+		getTimeStamp();
+		return games;
+	}
+
+	public List<Game> findByDate(String date) throws UnirestException, IOException {
+		HttpResponse<JsonNode> jsonResponse = Unirest.post(games).header("Client-ID", clientId)
+				.header("Authorization", Bearer).header("Accept", json)
+				.body("fields platforms.name,cover.url,name; limit 300; sort release_dates.date desc; where release_dates.date > 1609455600 & release_dates.date < 1633471200 & rating >= 80; ")
+				.asJson();
+		ObjectMapper objectMapper = new ObjectMapper();
+		List<Game> games = objectMapper.readValue(jsonResponse.getBody().toString().replaceAll("t_thumb", "t_1080p"),
+				new TypeReference<List<Game>>() {
+				});
 		return games;
 	}
 
@@ -68,6 +85,17 @@ public class GameService {
 			}
 		}
 		return games;
+	}
+
+	public void getTimeStamp() {
+		SimpleDateFormat sdf1 = new SimpleDateFormat("dd.MM.yyyy.HH.mm.ss");
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		System.out.println(timestamp);
+		Date date = new Date();
+		System.out.println(new Timestamp(date.getTime()));
+		System.out.println(timestamp.getTime());
+		System.out.println(sdf1.format(timestamp));
+
 	}
 
 }
