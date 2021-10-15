@@ -36,8 +36,10 @@ public class GameController {
 	@GetMapping("/search")
 	public String search(Model model, Game game) throws UnirestException, IOException {
 		List<Game> games = this.gameService.findByName(game.getName());
+		model.addAttribute("year", new Year());
+		model.addAttribute("game", new Game());
 		model.addAttribute("cont", games.size());
-		model.addAttribute("games", this.gameService.withoutCover(games));
+		model.addAttribute("games", games);
 		return "games/games";
 	}
 
@@ -45,6 +47,7 @@ public class GameController {
 	public String showGame(Model model, @RequestParam String id) throws UnirestException, NoSuchFieldException,
 			SecurityException, IllegalArgumentException, IllegalAccessException, IOException {
 		Game game = this.gameService.findById(id);
+		model.addAttribute("year", new Year());
 		model.addAttribute("game", game);
 		return "games/game";
 	}
@@ -54,8 +57,9 @@ public class GameController {
 		List<Game> games = this.gameService.findByYear(year.getYear());
 		model.addAttribute("game", new Game());
 		model.addAttribute("cont", games.size());
-		model.addAttribute("year", year.getYear());
-		model.addAttribute("games", this.gameService.withoutCover(games));
+		model.addAttribute("year", new Year());
+		model.addAttribute("newYear", year.getYear());
+		model.addAttribute("games", games);
 		return "games/games";
 	}
 
