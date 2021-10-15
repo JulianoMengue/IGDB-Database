@@ -5,6 +5,8 @@
 
 <body>
 	<div>
+		<h3 th:text="${year}" style="color: white;"></h3>
+		<h4 th:text="${'Result: '+cont+' games'}" style="color: white;"></h4>
 		<table class="table">
 			<tbody>
 				<tr th:each="game : ${games}">
@@ -17,6 +19,7 @@
 					<td><a th:href="@{/showGame(id=${game.id})}"> <img th:src="${game.cover.url}" width="100%;">
 						</a>
 					</td>
+
 				</tr>
 			</tbody>
 		</table>
