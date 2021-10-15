@@ -46,7 +46,7 @@ public class GameService {
 		HttpResponse<JsonNode> jsonResponse = Unirest.post(games).header("Client-ID", clientId)
 				.header("Authorization", Bearer).header("Accept", json)
 				.body("fields platforms.name,cover.url,name; limit 300; sort release_dates.date desc; where release_dates.date >"
-						+ begin + "  & release_dates.date <" + end + ";")
+						+ begin + "  & release_dates.date <" + end + " & cover.url != null;")
 				.asJson();
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Game> games = objectMapper.readValue(jsonResponse.getBody().toString().replaceAll("t_thumb", "t_1080p"),
