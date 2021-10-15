@@ -70,8 +70,8 @@
 				</span>
 			</div>
 		</form>
-
-
+		<br>
+		<h5 th:text="${game.name}" style="color: white;"></h5>
 		<p th:each="game : ${game}">
 			<a> <img th:src="${game.cover.url}" width="100%;"></a><br>
 			<a th:text="${game.summary}" class="btn btn-info" style="color: white;"></a><br>
