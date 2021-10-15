@@ -31,16 +31,18 @@
 
 <body th:fragment="header">
 	<div class="header" id="myHeader">
-		<a href="/"><img src="https://i.ibb.co/qnMB28k/Logo.png"></a>
-		<form method="GET" action="/search" th:object="${Game}">
-			<div class="input-group mb-3">
-				<input type="text" class="form-control" th:field="${game.name}" placeholder="Name"
-					aria-label="Recipient's username" aria-describedby="button-addon2" required>
-				<div class="input-group-append">
-					<button class="btn btn-info" type="submit" id="button-addon2">Search game by name</button>
+		<div class="container">
+			<a href="/"><img src="https://i.ibb.co/qnMB28k/Logo.png"></a>
+			<form method="GET" action="/search" th:object="${Game}">
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" th:field="${game.name}" placeholder="Name"
+						aria-label="Recipient's username" aria-describedby="button-addon2" required>
+					<div class="input-group-append">
+						<button class="btn btn-info" type="submit" id="button-addon2">Search game by name</button>
+					</div>
 				</div>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 </body>
 
