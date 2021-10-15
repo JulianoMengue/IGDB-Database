@@ -71,11 +71,11 @@
 		</form>
 
 
-		<table class="table">
+		<table class="table" style="width: 100%;">
 			<tbody>
 				<tr th:each="game : ${games}">
 					<td>
-						<h5 th:text="${game.name}" style="color: white;"></h5>
+						<h6 th:text="${game.name}" style="color: white;"></h6>
 						<p th:each="platform : ${game.platforms}"> <a th:text="${platform.name}"
 								style="color: white;"></a>
 						</p>
