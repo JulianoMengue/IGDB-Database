@@ -29,25 +29,13 @@ public class GameService {
 	public List<Game> findByName(String name) throws UnirestException, IOException {
 		HttpResponse<JsonNode> jsonResponse = Unirest.post(games).header("Client-ID", clientId)
 				.header("Authorization", Bearer).header("Accept", json)
-				.body("fields platforms.name,cover.url,name; limit 500; search \"+" + name + "+\";").asJson();
-		ObjectMapper objectMapper = new ObjectMapper();
-		List<Game> games = objectMapper.readValue(jsonResponse.getBody().toString().replaceAll("t_thumb", "t_1080p"),
-				new TypeReference<List<Game>>() {
-				});
-		withoutCover(games);
-		return games;
-	}
-
-	public List<Game> findAll() throws UnirestException, IOException {
-		HttpResponse<JsonNode> jsonResponse = Unirest.post(games).header("Client-ID", clientId)
-				.header("Authorization", Bearer).header("Accept", json)
-				.body("fields platforms.name,cover.url,name; limit 500; where release_dates.date > 1609455600 & release_dates.date < 1640908800; ")
+				.body("fields platforms.name,cover.url,name; limit 300; search \"+" + name
+						+ "+\"; where cover.url != null;")
 				.asJson();
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Game> games = objectMapper.readValue(jsonResponse.getBody().toString().replaceAll("t_thumb", "t_1080p"),
 				new TypeReference<List<Game>>() {
 				});
-		withoutCover(games);
 		return games;
 	}
 
@@ -57,14 +45,13 @@ public class GameService {
 
 		HttpResponse<JsonNode> jsonResponse = Unirest.post(games).header("Client-ID", clientId)
 				.header("Authorization", Bearer).header("Accept", json)
-				.body("fields platforms.name,cover.url,name; limit 500; sort release_dates.date desc; where release_dates.date >"
+				.body("fields platforms.name,cover.url,name; limit 300; sort release_dates.date desc; where release_dates.date >"
 						+ begin + "  & release_dates.date <" + end + ";")
 				.asJson();
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Game> games = objectMapper.readValue(jsonResponse.getBody().toString().replaceAll("t_thumb", "t_1080p"),
 				new TypeReference<List<Game>>() {
 				});
-		withoutCover(games);
 		return games;
 	}
 
@@ -80,15 +67,6 @@ public class GameService {
 				new TypeReference<List<Game>>() {
 				});
 		return games.get(0);
-	}
-
-	public List<Game> withoutCover(List<Game> games) {
-		for (int i = 0; i < games.size(); i++) {
-			if (games.get(i).getCover() == null) {
-				games.remove(i);
-			}
-		}
-		return games;
 	}
 
 	public long getYearBegin(String ano) throws ParseException {

@@ -24,12 +24,9 @@ public class GameController {
 	private GameService gameService;
 
 	@GetMapping()
-	public String games(Model model) throws UnirestException, IOException, ParseException {
-		List<Game> games = this.gameService.findAll();
+	public String games(Model model) throws UnirestException, IOException {
 		model.addAttribute("year", new Year());
 		model.addAttribute("game", new Game());
-		model.addAttribute("cont", games.size());
-		model.addAttribute("games", games);
 		return "games/search-game";
 	}
 
@@ -40,7 +37,7 @@ public class GameController {
 		model.addAttribute("game", new Game());
 		model.addAttribute("cont", games.size());
 		model.addAttribute("games", games);
-		return "games/games";
+		return "games/search-game";
 	}
 
 	@GetMapping("/showGame")
@@ -60,7 +57,7 @@ public class GameController {
 		model.addAttribute("year", new Year());
 		model.addAttribute("newYear", year.getYear());
 		model.addAttribute("games", games);
-		return "games/games";
+		return "games/search-game";
 	}
 
 }
