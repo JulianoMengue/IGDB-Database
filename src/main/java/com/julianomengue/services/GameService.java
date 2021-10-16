@@ -20,8 +20,8 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 @Service
 public class GameService {
 
-	private String clientId = "9elezo1801iqpfolq8iaison0q35lv";
-	private String Bearer = "Bearer osdu66akp344dme3mroa1vxm05dhig";
+	private String clientId = "";
+	private String Bearer = "";
 	private String json = "application/json";
 
 	private String games = "https://api.igdb.com/v4/games";
