@@ -35,7 +35,7 @@ public class GameController {
 		List<Game> games = this.gameService.findByName(game.getName());
 		model.addAttribute("year", new Year());
 		model.addAttribute("game", new Game());
-		model.addAttribute("cont", games.size());
+		model.addAttribute("cont", games.size() + " games");
 		model.addAttribute("games", games);
 		return "games/search-game";
 	}
@@ -45,7 +45,7 @@ public class GameController {
 			SecurityException, IllegalArgumentException, IllegalAccessException, IOException {
 		Game game = this.gameService.findById(id);
 		model.addAttribute("year", new Year());
-		model.addAttribute("game", game);
+		model.addAttribute("game", this.gameService.getRegion(game));
 		return "games/game";
 	}
 
@@ -53,7 +53,7 @@ public class GameController {
 	public String year(Model model, Year year) throws UnirestException, IOException, ParseException {
 		List<Game> games = this.gameService.findByYear(year.getYear());
 		model.addAttribute("game", new Game());
-		model.addAttribute("cont", games.size());
+		model.addAttribute("cont", games.size() + " games");
 		model.addAttribute("year", new Year());
 		model.addAttribute("newYear", year.getYear());
 		model.addAttribute("games", games);

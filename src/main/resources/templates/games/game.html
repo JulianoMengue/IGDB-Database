@@ -103,7 +103,8 @@
 		<h4 style="color: white;">Release dates</h4>
 		<span th:each="date : ${game.release_dates}">
 			<a th:text="${date.human}" style="color: white;"></a>
-			<a th:text="${date.platform.name}" style="color: white;"></a><br>
+			<a th:text="${date.platform.name}" style="color: white;"></a>
+			<a th:text="${'('+date.region+')'}" style="color: white;"></a><br>
 		</span>
 
 		</p>

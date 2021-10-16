@@ -29,8 +29,8 @@ public class GameService {
 	public List<Game> findByName(String name) throws UnirestException, IOException {
 		HttpResponse<JsonNode> jsonResponse = Unirest.post(games).header("Client-ID", clientId)
 				.header("Authorization", Bearer).header("Accept", json)
-				.body("fields platforms.name,cover.url,name; limit 300; search \"+" + name
-						+ "+\"; where cover.url != null;")
+				.body("fields platforms.name,cover.url,name; limit 500; search \"+" + name
+						+ "+\"; where cover.url != null ;")
 				.asJson();
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Game> games = objectMapper.readValue(jsonResponse.getBody().toString().replaceAll("t_thumb", "t_1080p"),
@@ -45,7 +45,7 @@ public class GameService {
 
 		HttpResponse<JsonNode> jsonResponse = Unirest.post(games).header("Client-ID", clientId)
 				.header("Authorization", Bearer).header("Accept", json)
-				.body("fields platforms.name,cover.url,name; limit 300; sort release_dates.date desc; where release_dates.date >"
+				.body("fields platforms.name,cover.url,name; limit 500; sort release_dates.date desc; where release_dates.date >"
 						+ begin + "  & release_dates.date <" + end + " & cover.url != null;")
 				.asJson();
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -59,8 +59,8 @@ public class GameService {
 		HttpResponse<JsonNode> response = Unirest.post(games).header("Client-ID", clientId)
 				.header("Authorization", Bearer).header("Accept", json)
 				.body("fields cover.url," + "genres.name," + "name," + "platforms.name," + "release_dates.human,"
-						+ "release_dates.platform.name," + "screenshots.url," + "summary," + "url," + "websites.url,"
-						+ "videos.video_id;" + " where id =" + id + ";")
+						+ "release_dates.platform.name," + "screenshots.url," + "release_dates.region," + "summary,"
+						+ "url," + "websites.url," + "videos.video_id;" + " where id =" + id + ";")
 				.asJson();
 		ObjectMapper objectMapper = new ObjectMapper();
 		List<Game> games = objectMapper.readValue(response.getBody().toString().replaceAll("t_thumb", "t_1080p"),
@@ -75,6 +75,36 @@ public class GameService {
 		Timestamp timestampYearBegin = new Timestamp(yearBeginDate.getTime());
 		long epoch = timestampYearBegin.getTime() / 1000;
 		return epoch;
+	}
+
+	public Game getRegion(Game game) {
+		for (int i = 0; i < game.getRelease_dates().size(); i++) {
+			if (game.getRelease_dates().get(i).getRegion().contentEquals("8")) {
+				game.getRelease_dates().get(i).setRegion("Worldwide");
+			}
+			if (game.getRelease_dates().get(i).getRegion().contentEquals("7")) {
+				game.getRelease_dates().get(i).setRegion("Asia");
+			}
+			if (game.getRelease_dates().get(i).getRegion().contentEquals("6")) {
+				game.getRelease_dates().get(i).setRegion("China");
+			}
+			if (game.getRelease_dates().get(i).getRegion().contentEquals("5")) {
+				game.getRelease_dates().get(i).setRegion("Japan");
+			}
+			if (game.getRelease_dates().get(i).getRegion().contentEquals("4")) {
+				game.getRelease_dates().get(i).setRegion("New Zealand");
+			}
+			if (game.getRelease_dates().get(i).getRegion().contentEquals("3")) {
+				game.getRelease_dates().get(i).setRegion("Australia");
+			}
+			if (game.getRelease_dates().get(i).getRegion().contentEquals("2")) {
+				game.getRelease_dates().get(i).setRegion("North America");
+			}
+			if (game.getRelease_dates().get(i).getRegion().contentEquals("1")) {
+				game.getRelease_dates().get(i).setRegion("Europe");
+			}
+		}
+		return game;
 	}
 
 	public long getYearEnd(String ano) throws ParseException {

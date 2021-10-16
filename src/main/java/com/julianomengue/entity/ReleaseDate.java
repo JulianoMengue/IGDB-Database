@@ -6,7 +6,7 @@ public class ReleaseDate {
 	private String human;
 	private Long date;
 	private Platform platform;
-	private Region region;
+	private String region;
 
 	public ReleaseDate() {
 		super();
@@ -41,20 +41,20 @@ public class ReleaseDate {
 		this.platform = platform;
 	}
 
-	public Region getRegion() {
-		return region;
-	}
-
-	public void setRegion(Region region) {
-		this.region = region;
-	}
-
 	public Long getDate() {
 		return date;
 	}
 
 	public void setDate(Long date) {
 		this.date = date;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
 	}
 
 }
