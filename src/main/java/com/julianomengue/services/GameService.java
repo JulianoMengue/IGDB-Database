@@ -77,6 +77,14 @@ public class GameService {
 		return epoch;
 	}
 
+	public long getYearEnd(String ano) throws ParseException {
+		String yearEnd = "31/12/" + ano;
+		Date yearEndDate = new SimpleDateFormat("dd/MM/yyyy").parse(yearEnd);
+		Timestamp timestampYearEndDate = new Timestamp(yearEndDate.getTime());
+		long epochYearEndDate = timestampYearEndDate.getTime() / 1000;
+		return epochYearEndDate;
+	}
+
 	public Game getRegion(Game game) {
 		for (int i = 0; i < game.getRelease_dates().size(); i++) {
 			if (game.getRelease_dates().get(i).getRegion().contentEquals("8")) {
@@ -105,14 +113,6 @@ public class GameService {
 			}
 		}
 		return game;
-	}
-
-	public long getYearEnd(String ano) throws ParseException {
-		String yearEnd = "31/12/" + ano;
-		Date yearEndDate = new SimpleDateFormat("dd/MM/yyyy").parse(yearEnd);
-		Timestamp timestampYearEndDate = new Timestamp(yearEndDate.getTime());
-		long epochYearEndDate = timestampYearEndDate.getTime() / 1000;
-		return epochYearEndDate;
 	}
 
 }
