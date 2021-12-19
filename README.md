@@ -4,4 +4,5 @@ Diese App basiert auf der öffentlichen API von Twitch (Amazon) mit einer Datenb
 
 Technologien: Spring Boot 2.5.5, Java 11, Bootstrap 5, IGDB(Amazon) Api, SQL.
 
+https://igdb-gamedatabase.herokuapp.com/
 
